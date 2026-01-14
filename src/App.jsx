@@ -28,32 +28,37 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/' element={ <Home />}/>
-          <Route path='/products' element={ <Products />}/>
-          <Route path='/about' element={ <About />}/>
-          <Route path='/contact' element={ <Contact />}/>
-          <Route path='/cart' element={ <Cart />}/>
-        
-          <Route path='/' element={<PrivateRoute />}>
-            <Route path='/checkout' element={ <Checkout />}/>
-            <Route path='/order-confirm' element={ <PaymentConfirmation />}/>
-          </Route>
+  {/* Public Routes */}
+  <Route path='/' element={<Home />} />
+  <Route path='/products' element={<Products />} />
+  <Route path='/about' element={<About />} />
+  <Route path='/contact' element={<Contact />} />
+  <Route path='/cart' element={<Cart />} />
+  <Route path='/checkout' element={<Checkout />} />
 
-          <Route path='/' element={<PrivateRoute publicPage />}>
-            <Route path='/login' element={ <LogIn />}/>
-            <Route path='/register' element={ <Register />}/>
-          </Route>
+  {/* Auth Routes */}
+  <Route element={<PrivateRoute publicPage />}>
+    <Route path='/login' element={<LogIn />} />
+    <Route path='/register' element={<Register />} />
+  </Route>
 
-           <Route path='/' element={<PrivateRoute adminOnly />}>
-            <Route path='/admin' element={ <AdminLayout />}>
-              <Route path='' element={<Dashboard />} />
-              <Route path='products' element={<AdminProducts />} />
-              <Route path='sellers' element={<Sellers />} />
-              <Route path='orders' element={<Orders />} />
-              <Route path='categories' element={<Category />} />
-            </Route>
-          </Route>
-        </Routes>
+  {/* Protected Routes */}
+  <Route element={<PrivateRoute />}>
+    
+    <Route path='/order-confirm' element={<PaymentConfirmation />} />
+  </Route>
+
+  {/* Admin Routes */}
+  <Route element={<PrivateRoute adminOnly />}>
+    <Route path='/admin' element={<AdminLayout />}>
+      <Route index element={<Dashboard />} />
+      <Route path='products' element={<AdminProducts />} />
+      <Route path='sellers' element={<Sellers />} />
+      <Route path='orders' element={<Orders />} />
+      <Route path='categories' element={<Category />} />
+    </Route>
+  </Route>
+</Routes>
       </Router>
       <Toaster position='bottom-center'/>
     </React.Fragment>

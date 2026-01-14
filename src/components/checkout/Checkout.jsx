@@ -11,6 +11,7 @@ import OrderSummary from './OrderSummary';
 import StripePayment from './StripePayment';
 import PaypalPayment from './PaypalPayment';
 
+
 const Checkout = () => {
     const [activeStep, setActiveStep] = useState(0);
     const dispatch = useDispatch();
@@ -75,11 +76,10 @@ const Checkout = () => {
                                         paymentMethod={paymentMethod}/>}
                 {activeStep === 3 && 
                     <>
-                        {paymentMethod === "Stripe" ? (
-                            <StripePayment />
-                        ) : (
-                            <PaypalPayment />
-                        )}
+                        {paymentMethod === "Stripe" && <StripePayment />}
+                            {paymentMethod === "Paypal" && <PaypalPayment />}
+                            {/* --- ADD THIS LINE --- */}
+                            
                     </>}
             </div>
         )}

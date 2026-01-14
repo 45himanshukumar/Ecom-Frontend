@@ -24,10 +24,10 @@ const AddCategoryForm = ({ setOpen, open, category, update = false }) => {
 
   const addNewCategoryHandler = (data) => {
     if (!update) {
-      //dispatch createCategoryDashboardAction
+     
       dispatch(createCategoryDashboardAction(data, setOpen, reset, toast));
     } else {
-      //dispatch updateCategoryDashboardAction
+     
       dispatch(
         updateCategoryDashboardAction(data, setOpen, category.id, reset, toast)
       );

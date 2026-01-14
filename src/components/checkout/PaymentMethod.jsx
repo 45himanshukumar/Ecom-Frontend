@@ -46,6 +46,13 @@ const PaymentMethod = () => {
                     control={<Radio color='primary' />} 
                     label="Paypal" 
                     className='text-gray-700'/>
+
+                    <FormControlLabel 
+                    value="Razorpay" 
+                    control={<Radio color='primary' />} 
+                    label="Razorpay (For INR)" 
+                    className='text-gray-700'/>
+                    
             </RadioGroup>
         </FormControl>
     </div>

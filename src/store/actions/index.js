@@ -89,7 +89,7 @@ export const increaseCartQuantity =
 
             dispatch({
                 type: "ADD_CART",
-                payload: {...data, quantity: newQuantity + 1 },
+                payload: {...data, quantity: newQuantity},
             });
             localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
         } else {
@@ -264,7 +264,7 @@ export const createUserCart = (sendCartItems) => async (dispatch, getState) => {
 export const getUserCart = () => async (dispatch, getState) => {
     try {
         dispatch({ type: "IS_FETCHING" });
-        const { data } = await api.get('/carts/users/cart');
+        const { data } = await api.get('/carts/user/cart');
         
         dispatch({
             type: "GET_USER_CART_PRODUCTS",
@@ -297,6 +297,9 @@ export const createStripePaymentSecret
             toast.error(error?.response?.data?.message || "Failed to create client secret");
         }
 };
+
+
+
 
 
 export const stripePaymentConfirmation 
