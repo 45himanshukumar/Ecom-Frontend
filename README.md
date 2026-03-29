@@ -1,12 +1,41 @@
-# React + Vite
+# 🛍️ E-Commerce React Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive, and feature-rich frontend application for a full-stack E-Commerce platform. Built with **React.js**, **Redux** for state management, and seamless integrations with payment gateways like **Stripe** and **PayPal**. This frontend provides distinct interfaces for Customers, Sellers, and Administrators.
 
-Currently, two official plugins are available:
+## ✨ Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **🔐 Authentication & Authorization:** Secure login and registration with role-based routing (`User`, `Seller`, `Admin`) using JWT tokens.
+* **🛒 Shopping Experience:** Browse products, dynamic filtering, pagination, and a fully functional shopping cart (add/remove items, update quantities).
+* **💳 Seamless Checkout:** Complete checkout flow including address management, order summary, and secure payment processing via **Stripe** and **PayPal**.
+* **👨‍💼 Admin & Seller Dashboards:** Dedicated layouts and features for administrators to manage categories, products, sellers, and orders.
+* **⚡ State Management:** Robust global state management using **Redux** (reducers for Cart, Auth, Products, Orders, Admin, etc.).
+* **📱 Responsive Design:** Built to work perfectly across desktop, tablet, and mobile devices with custom reusable components.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack & Libraries
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Library:** React.js (Bootstrapped likely with Vite/Create React App)
+* **State Management:** Redux & React-Redux
+* **Routing:** React Router DOM (Private Routes, Admin Layouts)
+* **Styling:** CSS (`index.css`) & Reusable UI Components
+* **Payments:** Stripe Elements / PayPal Integrations
+* **API Communication:** Axios / Fetch API (`src/api/api.js`)
+
+## 📂 Project Structure
+
+```text
+src/
+├── api/              # API instances and network call configurations
+├── assets/           # Static assets like images, sliders, and SVG icons
+├── components/       # UI Components
+│   ├── admin/        # Admin dashboard, category, product, and seller management
+│   ├── auth/         # Login and Register components
+│   ├── cart/         # Shopping cart interfaces
+│   ├── checkout/     # Address forms, payment methods, order summaries
+│   ├── home/         # Landing page and Hero banners
+│   ├── products/     # Product grids, cards, and dynamic filters
+│   └── shared/       # Reusable UI elements (Navbar, Sidebar, Modals, Loaders)
+├── hooks/            # Custom React hooks (useProductFilter, useCategoryFilter, etc.)
+├── store/            # Redux setup
+│   ├── actions/      # Redux actions
+│   └── reducers/     # Redux reducers (auth, cart, products, admin, error)
+└── utils/            # Helper functions (formatPrice, truncateText, constants) in your project.
