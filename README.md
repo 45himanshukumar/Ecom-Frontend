@@ -39,3 +39,40 @@ src/
 │   ├── actions/      # Redux actions
 │   └── reducers/     # Redux reducers (auth, cart, products, admin, error)
 └── utils/            # Helper functions (formatPrice, truncateText, constants) in your project.
+```
+⚙️ Local Setup & Installation
+1. Prerequisites
+Make sure you have Node.js (v16 or higher) and npm/yarn installed on your machine.
+
+2. Clone the Repository
+Bash
+git clone [https://github.com/your-username/your-frontend-repo-name.git](https://github.com/your-username/your-frontend-repo-name.git)
+cd your-frontend-repo-name
+3. Install Dependencies
+Bash
+npm install
+# or
+yarn install
+4. Environment Variables
+Create a .env file in the root of your project and configure your environment variables. You will need variables for your backend API URL and Payment Gateway public keys:
+
+Code snippet
+# Backend API URL (Update if your Spring Boot backend runs on a different port)
+VITE_API_BASE_URL=http://localhost:8080/api
+
+# Payment Gateway Keys
+VITE_STRIPE_PUBLIC_KEY=your_stripe_publishable_key
+VITE_PAYPAL_CLIENT_ID=your_paypal_client_id
+(Note: Use REACT_APP_ prefix instead of VITE_ if you are using Create React App instead of Vite).
+
+5. Run the Application
+Start the development server:
+
+Bash
+npm run dev
+# or 
+npm start
+The application will usually run on http://localhost:5173 (Vite) or http://localhost:3000 (CRA).
+
+🔌 Backend Integration
+This frontend is designed to consume a RESTful API backend (built with Spring Boot). Ensure your backend server is up and running, and that CORS is properly configured on the backend to accept requests from your frontend's local development port.
