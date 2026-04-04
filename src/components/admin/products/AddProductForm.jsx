@@ -43,6 +43,7 @@ const dispatch = useDispatch();
             const sendData = {
                 ...data,
                 id: product.id,
+                productId: product.productId || product.id,
             };
             dispatch(updateProductFromDashboard(sendData, toast, reset, setLoader, setOpen, isAdmin));
         }

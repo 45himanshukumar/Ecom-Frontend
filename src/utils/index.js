@@ -1,13 +1,14 @@
 import { FaBoxOpen, FaHome, FaShoppingCart, FaStore, FaThList } from "react-icons/fa";
-import { bannerImageOne, bannerImageThree, bannerImageTwo } from "./constant";
+import { bannerImageOne, bannerImageThree, bannerImageTwo} from "./constant";
 
 export const bannerLists = [
     {
-        id: 1,
-        image: bannerImageOne,
-        title: "Home Comfort",
-        subtitle: "Living Room",
-        description: "Upgrade your space with cozy and stylish sofas",
+      
+        id: 1, 
+        image: bannerImageOne, 
+        title: "Little Trendsetters",
+        subtitle: "Kids' Fashion",
+        description: "Stylish and comfortable outfits for your little ones.",
       },
       {
         id: 2,
@@ -17,12 +18,13 @@ export const bannerLists = [
         description: "Experience the latest in home entertainment",
       },
       {
-        id: 3,
-        image: bannerImageThree,
-        title: "Playful Picks",
-        subtitle: "Kids' Clothing",
-        description: "Bright and fun styles for kids, up to 20% off",
-    }
+        id: 3, 
+        image: bannerImageThree, 
+        title: "Modern Living",
+        subtitle: "Premium Furniture",
+        description: "Transform your home with our elegant furniture collection.",
+      }
+      
 ];
 
 

@@ -5,5 +5,5 @@ import bannerImageThree from "../assets/sliders/s_3.webp";
 export {
     bannerImageOne,
     bannerImageTwo,
-    bannerImageThree
+    bannerImageThree,
 }

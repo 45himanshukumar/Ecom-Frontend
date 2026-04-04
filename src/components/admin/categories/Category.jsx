@@ -32,7 +32,7 @@ const Category = () => {
     pagination?.pageNumber + 1 || 1
   );
 
-  // Calling the `useCategoryFilter` custom hook to handle category fetching and pagination based on the current URL parameters.
+  // Calling the `useCategoryFilter` custom hook to handle category fetching and pagination
   useCategoryFilter();
 
   const tableRecords = categories?.map((item) => ({
@@ -67,10 +67,9 @@ const Category = () => {
 
   const emptyCategories = !categories || categories?.length === 0;
 
-  if (errorMessage) return <ErrorPage message={errorMessage} />;
-
   return (
     <div>
+      {/* 1. Button Section - This will now ALWAYS show */}
       <div className="pt-6 pb-10 flex justify-end">
         <button
           onClick={() => setOpenModal(true)}
@@ -80,51 +79,60 @@ const Category = () => {
           Add Category
         </button>
       </div>
-      {!emptyCategories && (
-        <h1 className="text-slate-800 text-3xl text-center font-bold pb-6 uppercase">
-          All Categories
-        </h1>
-      )}
 
-      {categoryLoader ? (
-        <Loader />
+      {/* 2. Error Handling - Only hide the LIST if there is an error */}
+      {errorMessage ? (
+        <ErrorPage message={errorMessage} />
       ) : (
+        // If no error, show the list content
         <>
-          {emptyCategories ? (
-            <div className="flex flex-col items-center justify-center text-gray-600 py-10">
-              <FaFolderOpen size={50} className="mb-3" />
-              <h2 className="text-2xl font-semibold">
-                No Categories Created Yet
-              </h2>
-            </div>
+          {!emptyCategories && (
+            <h1 className="text-slate-800 text-3xl text-center font-bold pb-6 uppercase">
+              All Categories
+            </h1>
+          )}
+
+          {categoryLoader ? (
+            <Loader />
           ) : (
-            <div className="max-w-fit mx-auto">
-              <DataGrid
-                className="w-full"
-                rows={tableRecords}
-                columns={categoryTableColumns(handleEdit, handleDelete)}
-                paginationMode="server"
-                rowCount={pagination?.totalElements || 0}
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: pagination?.pageSize || 10,
-                      page: currentPage - 1,
-                    },
-                  },
-                }}
-                onPaginationModelChange={handlePaginationChange}
-                disableRowSelectionOnClick
-                disableColumnResize
-                pageSizeOptions={[pagination?.pageSize || 10]}
-                pagination
-                paginationOptions={{
-                  showFirstButton: true,
-                  showLastButton: true,
-                  hideNextButton: currentPage === pagination?.totalPages,
-                }}
-              />
-            </div>
+            <>
+              {emptyCategories ? (
+                <div className="flex flex-col items-center justify-center text-gray-600 py-10">
+                  <FaFolderOpen size={50} className="mb-3" />
+                  <h2 className="text-2xl font-semibold">
+                    No Categories Created Yet
+                  </h2>
+                </div>
+              ) : (
+                <div className="max-w-fit mx-auto">
+                  <DataGrid
+                    className="w-full"
+                    rows={tableRecords}
+                    columns={categoryTableColumns(handleEdit, handleDelete)}
+                    paginationMode="server"
+                    rowCount={pagination?.totalElements || 0}
+                    initialState={{
+                      pagination: {
+                        paginationModel: {
+                          pageSize: pagination?.pageSize || 10,
+                          page: currentPage - 1,
+                        },
+                      },
+                    }}
+                    onPaginationModelChange={handlePaginationChange}
+                    disableRowSelectionOnClick
+                    disableColumnResize
+                    pageSizeOptions={[pagination?.pageSize || 10]}
+                    pagination
+                    paginationOptions={{
+                      showFirstButton: true,
+                      showLastButton: true,
+                      hideNextButton: currentPage === pagination?.totalPages,
+                    }}
+                  />
+                </div>
+              )}
+            </>
           )}
         </>
       )}

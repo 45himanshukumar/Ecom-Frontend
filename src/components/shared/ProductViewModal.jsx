@@ -7,6 +7,10 @@ import { MdClose, MdDone } from 'react-icons/md';
 function ProductViewModal({open, setOpen, product, isAvailable}) {
   
   const {id, productName, image, description, quantity, price, discount, specialPrice} = product;
+
+
+  const stockStatus = quantity && Number(quantity) > 0;
+
   const handleClickOpen = () => {
     setOpen(true);
   }
@@ -42,10 +46,10 @@ function ProductViewModal({open, setOpen, product, isAvailable}) {
                   {specialPrice ? (
                     <div className="flex items-center gap-2">
                       <span className="text-gray-400 line-through">
-                        ${Number(price).toFixed(2)}
+                          ₹{Number(price).toFixed(2)}
                       </span>
                       <span className="sm:text-xl font-semibold text-slate-700">
-                        ${Number(specialPrice).toFixed(2)}
+                          ₹{Number(specialPrice).toFixed(2)}
                       </span>
                     </div>
                   ) : (
@@ -55,12 +59,12 @@ function ProductViewModal({open, setOpen, product, isAvailable}) {
                     </span>
                   )}
 
-                  {isAvailable ? (
+                  {stockStatus ? (
                     <Status
                       text="In Stock"
-                      icon={MdDone}
-                      bg="bg-teal-200"
-                      color="text-teal-900"
+                    icon={MdDone}
+                    bg="bg-teal-200"
+                    color="text-teal-900"
                     />
                   ) : (
                     <Status

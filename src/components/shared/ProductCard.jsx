@@ -7,15 +7,15 @@ import { addToCart } from "../../store/actions";
 import toast from "react-hot-toast";
 
 const ProductCard = ({
-        productId,
-        productName,
-        image,
-        description,
-        quantity,
-        price,
-        discount,
-        specialPrice,
-        about = false,
+    productId,
+    productName,
+    image,
+    description,
+    quantity,
+    price,
+    discount,
+    specialPrice,
+    about = false,
 }) => {
     const [openProductViewModal, setOpenProductViewModal] = useState(false);
     const btnLoader = false;
@@ -35,7 +35,9 @@ const ProductCard = ({
     };
 
     return (
-        <div className="border rounded-lg shadow-xl overflow-hidden transition-shadow duration-300">
+        
+        <div className="rounded-lg shadow-lg border border-gray-200 overflow-hidden transition-shadow duration-300 hover:shadow-2xl bg-white">
+            
             <div onClick={() => {
                 handleProductView({
                     id: productId,
@@ -48,13 +50,16 @@ const ProductCard = ({
                     specialPrice,
                 })
             }} 
-                    className="w-full overflow-hidden aspect-3/2">
+        
+            className="w-full h-72 overflow-hidden bg-white flex justify-center items-center relative group"> 
+                
                 <img 
-                className="w-full h-full cursor-pointer transition-transform duration-300 transform hover:scale-105"
+                className="h-full w-auto object-contain cursor-pointer transition-transform duration-500 transform group-hover:scale-110"
                 src={image}
                 alt={productName}>
                 </img>
             </div>
+
             <div className="p-4">
                 <h2 onClick={() => {
                 handleProductView({
@@ -68,13 +73,13 @@ const ProductCard = ({
                     specialPrice,
                 })
             }}
-                    className="text-lg font-semibold mb-2 cursor-pointer">
-                    {truncateText(productName, 50)}
+                    className="text-sm font-semibold mb-1 cursor-pointer hover:text-blue-600">
+                    {truncateText(productName, 25)}
                 </h2>
                 
-                <div className="min-h-20 max-h-20">
-                    <p className="text-gray-600 text-sm">
-                        {truncateText(description, 80)}
+                <div className="h-10 overflow-hidden mb-2">
+                    <p className="text-gray-500 text-xs leading-tight">
+                        {truncateText(description, 50)}
                     </p>
                 </div>
 
@@ -82,17 +87,16 @@ const ProductCard = ({
                 <div className="flex items-center justify-between">
                 {specialPrice ? (
                     <div className="flex flex-col">
-                        <span className="text-gray-400 line-through">
-                            ${Number(price).toFixed(2)}
+                        <span className="text-gray-400 line-through text-xs">
+                            ₹{Number(price).toFixed(0)}
                         </span>
-                        <span className="text-xl font-bold text-slate-700">
-                            ${Number(specialPrice).toFixed(2)}
+                        <span className="text-sm font-bold text-slate-700">
+                            ₹{Number(specialPrice).toFixed(0)}
                         </span>
                     </div>
                 ) : (
-                    <span className="text-xl font-bold text-slate-700">
-                        {"  "}
-                        ${Number(price).toFixed(2)}
+                    <span className="text-sm font-bold text-slate-700">
+                        ₹{Number(price).toFixed(0)}
                     </span>
                 )}
 
@@ -107,10 +111,10 @@ const ProductCard = ({
                         productId,
                         quantity,
                     })}
-                    className={`bg-blue-500 ${isAvailable ? "opacity-100 hover:bg-blue-600" : "opacity-70"}
-                        text-white py-2 px-3 rounded-lg items-center transition-colors duration-300 w-36 flex justify-center`}>
-                    <FaShoppingCart className="mr-2"/>
-                    {isAvailable ? "Add to Cart" : "Stock Out"}
+                    className={`bg-blue-600 ${isAvailable ? "opacity-100 hover:bg-blue-700" : "opacity-70"}
+                        text-white text-xs py-1.5 px-3 rounded shadow-sm flex items-center transition-all duration-300`}>
+                    <FaShoppingCart className="mr-1 text-xs"/>
+                    {isAvailable ? "Add" : "Out"}
                 </button>
                 </div>
             )}
