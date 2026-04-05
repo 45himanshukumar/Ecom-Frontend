@@ -249,7 +249,7 @@ export const addPaymentMethod = (method) => {
 export const createUserCart = (sendCartItems) => async (dispatch, getState) => {
     try {
         dispatch({ type: "IS_FETCHING" });
-        await api.post('/cart/create', sendCartItems);
+        await api.post('/carts/create', sendCartItems);
         await dispatch(getUserCart());
     } catch (error) {
         console.log(error);
@@ -264,7 +264,7 @@ export const createUserCart = (sendCartItems) => async (dispatch, getState) => {
 export const getUserCart = () => async (dispatch, getState) => {
     try {
         dispatch({ type: "IS_FETCHING" });
-        const { data } = await api.get('/carts/user/cart');
+        const { data } = await api.get('/carts/users/cart');
         
         dispatch({
             type: "GET_USER_CART_PRODUCTS",
@@ -623,5 +623,58 @@ export const addNewDashboardSeller =
     } finally {
       setLoader(false);
       setOpen(false);
+    }
+  };
+  // ─────────────────────────────────────────────────────────────────────────────
+// ADD THESE TWO ACTIONS to the bottom of src/store/actions/index.js
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const createRazorpayOrder =
+  (sendData) => async (dispatch) => {
+    try {
+      dispatch({ type: "IS_FETCHING" });
+      const { data } = await api.post("/order/razorpay-order", sendData);
+      // data = { orderId, keyId, amount, currency }
+      dispatch({
+        type: "SET_RAZORPAY_ORDER",
+        payload: data,
+      });
+      dispatch({ type: "IS_SUCCESS" });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: "IS_ERROR",
+        payload:
+          error?.response?.data?.message || "Failed to create Razorpay order",
+      });
+    }
+  };
+
+export const razorpayPaymentConfirmation =
+  (sendData, toast, setPaying) => async (dispatch) => {
+    try {
+      const response = await api.post(
+        "/order/users/payments/razorpay",
+        sendData
+      );
+      if (response.data) {
+        localStorage.removeItem("CHECKOUT_ADDRESS");
+        localStorage.removeItem("cartItems");
+        dispatch({ type: "REMOVE_CLIENT_SECRET_ADDRESS" });
+        dispatch({ type: "CLEAR_RAZORPAY_ORDER" });
+        dispatch({ type: "CLEAR_CART" });
+        toast.success("🎉 Order placed successfully!");
+        // Redirect to confirmation page
+        window.location.href = "/order-confirm?status=razorpay_success";
+      } else {
+        toast.error("Payment verification failed. Please contact support.");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(
+        error?.response?.data?.message || "Payment verification failed"
+      );
+    } finally {
+      setPaying(false);
     }
   };

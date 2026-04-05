@@ -10,6 +10,7 @@ import PaymentMethod from './PaymentMethod';
 import OrderSummary from './OrderSummary';
 import StripePayment from './StripePayment';
 import PaypalPayment from './PaypalPayment';
+import RazorpayPayment from './RazorpayPayment'; // ← NEW IMPORT
 
 
 const Checkout = () => {
@@ -33,7 +34,7 @@ const Checkout = () => {
         }
 
         if(activeStep === 1 && (!selectedUserCheckoutAddress || !paymentMethod)) {
-            toast.error("Please select payment address before proceeding.");
+            toast.error("Please select payment method before proceeding.");
             return;
         }
         
@@ -69,18 +70,21 @@ const Checkout = () => {
             <div className='mt-5'>
                 {activeStep === 0 && <AddressInfo address={address} />}
                 {activeStep === 1 && <PaymentMethod />}
-                {activeStep === 2 && <OrderSummary 
-                                        totalPrice={totalPrice}
-                                        cart={cart}
-                                        address={selectedUserCheckoutAddress}
-                                        paymentMethod={paymentMethod}/>}
-                {activeStep === 3 && 
+                {activeStep === 2 && (
+                    <OrderSummary 
+                        totalPrice={totalPrice}
+                        cart={cart}
+                        address={selectedUserCheckoutAddress}
+                        paymentMethod={paymentMethod}
+                    />
+                )}
+                {activeStep === 3 && (
                     <>
                         {paymentMethod === "Stripe" && <StripePayment />}
-                            {paymentMethod === "Paypal" && <PaypalPayment />}
-                            {/* --- ADD THIS LINE --- */}
-                            
-                    </>}
+                        {paymentMethod === "Paypal" && <PaypalPayment />}
+                        {paymentMethod === "Razorpay" && <RazorpayPayment />}  {/* ← NEW */}
+                    </>
+                )}
             </div>
         )}
         
